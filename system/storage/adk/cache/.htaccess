@@ -1,0 +1,7 @@
+# Automatically generated .htaccess file by Advertikon Cache class
+			Order Deny,allow
+			Deny from all
+			<Files "*">
+				Order allow,deny
+				Deny from all
+			</Files>

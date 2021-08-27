@@ -1,0 +1,19 @@
+#!/bin/bash
+sudo yum install -y httpd24 php72 php72-mysqlnd
+sudo yum install -y mod24_ssl
+sudo wget https://dl.eff.org/certbot-auto
+chmod a+x certbot-auto
+
+sudo usermod -a -G apache ec2-user
+sudo chown -R ec2-user:apache /var/www
+sudo rm -rf /var/www/html/.vscode
+sudo rm -rf /var/www/html/.vscode/*
+sudo rm -rf /var/www/html/.gitignore
+sudo rm -rf /var/www/html/.htaccess
+sudo rm -rf /var/www/html/thiessens/.htaccess
+sudo rm -rf /var/www/html/thiessens/*
+sudo rm -rf /var/www/html/*
+sudo find . -name '.DS_Store' -type f -delete
+sudo find . -name '.gitignore' -type f -delete
+sudo chmod 0777 -R /var/www
+sudo find /var/www -type d -exec sudo chmod 2775 {} \;

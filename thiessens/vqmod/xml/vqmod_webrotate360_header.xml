@@ -1,0 +1,31 @@
+<modification>
+	<id>www.webrotate360.com</id>
+	<version>1.7.0</version>
+	<vqmver>2.x</vqmver>
+	<author>www.webrotate360.com</author>
+	<file name="catalog/controller/common/header.php">
+        <operation error="log">
+			<search position="after" index="1">
+				<![CDATA[<?php]]>
+			</search>
+			<add>
+				<![CDATA[
+					global $__wr360Path; $__wr360Path = 'catalog';
+					if(defined('DIR_APPLICATION')) $__wr360Path = preg_replace('/.*\/([^\/].*)\//is', '$1', DIR_APPLICATION);
+					include $__wr360Path.'/controller/extension/module/webrotate360.php';
+                ]]>
+			</add>
+		</operation>
+	    <operation error="log">
+			<search position="before" index="1">
+				<![CDATA[return $this->load->view('common/header', $data)]]>
+			</search>
+			<add>
+				<![CDATA[
+					$output = $this->load->view('common/header', $data);
+					return addWR360Headers($this, $output, $this->db);
+                ]]>
+			</add>
+		</operation>
+	</file>
+</modification>
